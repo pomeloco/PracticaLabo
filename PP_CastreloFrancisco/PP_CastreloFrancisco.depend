@@ -1,0 +1,50 @@
+# depslib dependency file v1.0
+1557333600 source:e:\pp_castrelofrancisco\input.c
+	"input.h"
+	<string.h>
+	<stdio.h>
+
+1557336324 e:\pp_castrelofrancisco\input.h
+
+1557327330 source:e:\pp_castrelofrancisco\main.c
+	<stdio.h>
+	<stdlib.h>
+	"libreria.h"
+	"input.h"
+
+1557336120 e:\pp_castrelofrancisco\libreria.h
+	"input.h"
+
+1557333600 e:\pp_castrelofrancisco\input.c
+	"input.h"
+	<string.h>
+	<stdio.h>
+
+1557336324 source:e:\pp_castrelofrancisco\libreria.c
+	"libreria.h"
+	"input.h"
+	<stdio.h>
+
+1561414490 source:c:\users\francisco\desktop\facultad\pp\pp_castrelofrancisco\input.c
+	"input.h"
+	<string.h>
+	<stdio.h>
+
+1561413770 c:\users\francisco\desktop\facultad\pp\pp_castrelofrancisco\input.h
+
+1561414186 source:c:\users\francisco\desktop\facultad\pp\pp_castrelofrancisco\libreria.c
+	<stdio.h>
+	<conio.h>
+	<string.h>
+	"libreria.h"
+	"input.h"
+
+1561411864 c:\users\francisco\desktop\facultad\pp\pp_castrelofrancisco\libreria.h
+	"input.h"
+
+1561413770 source:c:\users\francisco\desktop\facultad\pp\pp_castrelofrancisco\main.c
+	<stdio.h>
+	<stdlib.h>
+	"libreria.h"
+	"input.h"
+
