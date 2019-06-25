@@ -32,17 +32,17 @@
 
 1561413770 c:\users\francisco\desktop\facultad\pp\pp_castrelofrancisco\input.h
 
-1561414186 source:c:\users\francisco\desktop\facultad\pp\pp_castrelofrancisco\libreria.c
+1561425362 source:c:\users\francisco\desktop\facultad\pp\pp_castrelofrancisco\libreria.c
 	<stdio.h>
 	<conio.h>
 	<string.h>
 	"libreria.h"
 	"input.h"
 
-1561411864 c:\users\francisco\desktop\facultad\pp\pp_castrelofrancisco\libreria.h
+1561425355 c:\users\francisco\desktop\facultad\pp\pp_castrelofrancisco\libreria.h
 	"input.h"
 
-1561413770 source:c:\users\francisco\desktop\facultad\pp\pp_castrelofrancisco\main.c
+1561422050 source:c:\users\francisco\desktop\facultad\pp\pp_castrelofrancisco\main.c
 	<stdio.h>
 	<stdlib.h>
 	"libreria.h"

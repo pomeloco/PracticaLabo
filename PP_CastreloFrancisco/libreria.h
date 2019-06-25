@@ -77,6 +77,8 @@ int removeLibro(eLibros*, int, int);
 int removeSocio(eSocios*, int, int);
 /*****************************************************************************************/
 
-void DarAltaSocio (eSocios*,int);
-void ModificarSocio (eSocios*, int);
-void BajaSocio (eSocios*, int);
+void DarAltaSocio(eSocios*,int);
+void ModificarSocio(eSocios*, int);
+void BajaSocios(eSocios*, int);
+void ListarSocio(eSocios*,int);
+void ListarTodosSocios(eSocios*,int);

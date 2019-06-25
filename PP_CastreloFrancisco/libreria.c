@@ -45,9 +45,16 @@ int initSocios(eSocios* Socios, int nCant){
 
             for(i=0;i<nCant;i++){
 
-
+                Socios[i].nCodigoSocio=0;
+                strcpy(Socios[i].szNombre,"");
+                strcpy(Socios[i].szApellido,"");
+                strcpy(Socios[i].szTelefono,"");
+                strcpy(Socios[i].szEMail,"");
+                Socios[i].cSexo=' ';
                 Socios[i].isEmpty = 1;
-
+                Socios[i].FechaAsocioado.nDia=0;
+                Socios[i].FechaAsocioado.nMes=0;
+                Socios[i].FechaAsocioado.nAnio=0;
             }
 
     return initReturn;
@@ -111,12 +118,11 @@ int buscarLibreLibros(eLibros* Libros, int nCant){
 
 int buscarLibreSocios(eSocios* Socios, int nCant){
 
-    int nIndexLibre= -1 ,i;
+    int nIndexLibre=-1 ,i;
 
     for(i=0;i<nCant;i++){
 
         if(Socios[i].isEmpty == 1){
-
 
             nIndexLibre = i;
             break;
@@ -218,7 +224,7 @@ int addSocio(eSocios* Socios, char szApellido[],char szNombre[],char cSexo,char 
 
     if(nIndexLibre != -1){
 
-        Socios[nIndexLibre].nCodigoSocio = nIndexLibre+100;
+        Socios[nIndexLibre].nCodigoSocio = nIndexLibre+1;
         strcpy(Socios[nIndexLibre].szNombre, szNombre);
         strcpy(Socios[nIndexLibre].szApellido, szApellido);
         strcpy(Socios[nIndexLibre].szTelefono, szTelefono);
@@ -226,11 +232,14 @@ int addSocio(eSocios* Socios, char szApellido[],char szNombre[],char cSexo,char 
         Socios[nIndexLibre].cSexo = cSexo;
         Socios[nIndexLibre].FechaAsocioado = Fecha;
         Socios[nIndexLibre].isEmpty = 0;
+        printf("ID SOCIO: %d   INDEX LIBRE: %d   INDEX LIBRE +1:%d",Socios[nIndexLibre].nCodigoSocio,nIndexLibre,nIndexLibre+1);
+
+
 
     }else{
 
 
-        return -1;
+      return -1;
 
     }
 
@@ -471,10 +480,9 @@ int removeSocio(eSocios* Socios, int nIdSocio, int nCant){
 void DarAltaSocio(eSocios* Socio,int nCant){
 
     char szNombre[100],szApellido[100],szTelefono[100],szMail[100];
-    int nAuxInt;
+    int nAuxInt,AgregarSocio,nIndexAux;
     char cSexo;
     eFecha AuxFecha;
-    int AgregarSocio;
 
 
     printf("Ingresar Nombre del Socio: ");
@@ -528,7 +536,7 @@ void DarAltaSocio(eSocios* Socio,int nCant){
 
     while(ValidarCharacter(cSexo,'f','m')!=0){
 
-        printf("Reingrese Sexo del Socio: ");
+        printf("Reingrese Sexo del Socio(F/M): ");
         fflush(stdin);
         scanf("%c", &cSexo);
     }
@@ -537,9 +545,9 @@ void DarAltaSocio(eSocios* Socio,int nCant){
     fflush(stdin);
     scanf("%d", &AuxFecha.nDia);
 
-    while(ValidarEnteroRango(AuxFecha.nDia,31,1)!=0){
+    while(ValidarRangoEntero(AuxFecha.nDia,31,1)!=0){
 
-        printf("Reingrese Dia del Asociado: ");
+        printf("Reingrese Dia del Asociado (entre 1 y 31): ");
         fflush(stdin);
         scanf("%d", &AuxFecha.nDia);
     }
@@ -548,9 +556,9 @@ void DarAltaSocio(eSocios* Socio,int nCant){
     fflush(stdin);
     scanf("%d", &AuxFecha.nMes);
 
-    while(ValidarEnteroRango(AuxFecha.nMes,12,1)!=0){
+    while(ValidarRangoEntero(AuxFecha.nMes,12,1)!=0){
 
-        printf("Reingrese mes del Asociado: ");
+        printf("Reingrese mes del Asociado (entre 1 y 12): ");
         fflush(stdin);
         scanf("%d", &AuxFecha.nMes);
     }
@@ -560,13 +568,14 @@ void DarAltaSocio(eSocios* Socio,int nCant){
     fflush(stdin);
     scanf("%d", &AuxFecha.nAnio);
 
-    while(ValidarEnteroRango(AuxFecha.nAnio,2019,2000)!=0){
+    while(ValidarRangoEntero(AuxFecha.nAnio,2019,2000)!=0){
 
-        printf("Reingrese Anio del Asociado: ");
+        printf("Reingrese Anio del Asociado (entre 2000 y 2019): ");
         fflush(stdin);
         scanf("%d", &AuxFecha.nAnio);
     }
 
+    nIndexAux=buscarLibreSocios(Socio,nCant);
    AgregarSocio = addSocio(Socio,szApellido,szNombre,cSexo,szTelefono,szMail,AuxFecha, nCant);
 
    if(AgregarSocio != 0){
@@ -590,7 +599,7 @@ void ModificarSocio(eSocios* Socio, int nCantidad){
     scanf("%d", &nAuxiliar);
 
     nAuxiliar=findSocioById(Socio,nCantidad,nAuxiliar);
-
+    ListarSocio(Socio,nAuxiliar);
     if(nAuxiliar==-1){
 
         printf("No se encontro la ID buscada");
@@ -600,7 +609,7 @@ void ModificarSocio(eSocios* Socio, int nCantidad){
         do{
         printf("1.Modificar Nombre\n2.Modificar Apellido\n3.Modificar Sexo\n4.Modificar Telefono\n5.Modificar eMail\n6.Volver al Menu principal");
         scanf("%d", &nOpcion);
-        while(ValidarEnteroRango(nOpcion,1,6)!=0){
+        while(ValidarRangoEntero(nOpcion,1,6)!=0){
             printf("Ingresar Opcion Correcta: ");
             scanf("%d", &nOpcion);
         }
@@ -654,7 +663,7 @@ void ModificarSocio(eSocios* Socio, int nCantidad){
 
                         while(ValidarCharacter(cSexo,'f','m')!=0){
 
-                            printf("Reingrese el sexo: ");
+                            printf("Reingrese el sexo (F/M):  ");
                             fflush(stdin);
                             scanf("%c",&cSexo);
                             }
@@ -705,5 +714,40 @@ void BajaSocios(eSocios* Socio, int nCant){
         removeSocio(Socio,auxInt,nCant);
         printf("Socio dado de baja");
     }
+
+}
+
+
+
+
+void ListarSocio(eSocios* Socio,int nIndex){
+
+
+    if(Socio[nIndex].isEmpty==0)
+    printf("%d - %s,%s [%c]\n%s\n%s\nFecha:%d/%d/%d\n********\n",Socio[nIndex].nCodigoSocio,Socio[nIndex].szNombre,Socio[nIndex].szApellido,Socio[nIndex].cSexo,Socio[nIndex].szEMail,Socio[nIndex].szTelefono,Socio[nIndex].FechaAsocioado.nDia,Socio[nIndex].FechaAsocioado.nMes,Socio[nIndex].FechaAsocioado.nAnio);
+
+
+}
+
+
+
+
+
+
+
+void ListarTodosSocios(eSocios* Socio,int nCant){
+
+    int i;
+
+    for(i=1;i<nCant;i++){
+
+
+        if(Socio[i].isEmpty==0)
+            ListarSocio(Socio,i);
+
+
+    }
+
+
 
 }
